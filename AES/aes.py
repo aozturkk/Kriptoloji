@@ -15,7 +15,7 @@ def encrypt(plain_text,key,iv):
 	buf = bytearray( 2*len(plain_text_byte) - 1  )
 	len_encrypted = encryptor.update_into(plain_text_byte, buf)
 	ct = bytes(buf[:len_encrypted]) + encryptor.finalize()	
-	return base64.b64encode(ct)
+	return base64.b64encode(ct).decode()
 	
 def decrypt(encrypt_text,key,iv):
 
@@ -47,8 +47,8 @@ key = hashlib.md5( hashlib.sha256( (key).encode() ).hexdigest().encode() ).hexdi
 iv = '4377777172699a75'.encode()
 
 if option == '1':
-	enc = encrypt(text,key,iv).decode()
+	enc = encrypt(text,key,iv)
 	print("Encrypt :",enc)
-else :	
+else :
 	dec = decrypt(text,key,iv)	
 	print("Decrypt :",dec)
